@@ -1,20 +1,22 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">IG Icebreaker</a>
+        <a class="navbar-brand" routerLink='/' routerLinkActive='active'>IG Icebreaker</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto" *ngIf="accountService.currentUser$ | async">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Matches</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Lists</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Messages</a>
-            </li>
+          <ul class="navbar-nav mr-auto">
+            <ng-container *ngIf="accountService.currentUser$ | async">
+              <li class="nav-item">
+                <a class="nav-link" routerLink='/members' routerLinkActive='active'>Matches</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink='/lists' routerLinkActive='active'>Lists</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" routerLink='/messages' routerLinkActive='active'>Messages</a>
+              </li>
+            </ng-container>
           </ul>
 
           <div class="dropdown" *ngIf="accountService.currentUser$| async" dropdown>
