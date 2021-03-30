@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
 import { PresenceService } from './_services/presence.service';
@@ -11,6 +12,7 @@ import { PresenceService } from './_services/presence.service';
 })
 export class AppComponent implements OnInit {
   title = 'IG Ice Breaker';
+  baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient, private accountService: AccountService, private presence: PresenceService) {}
   users: any;
@@ -30,7 +32,7 @@ export class AppComponent implements OnInit {
   }
 
   getUsers() {
-    this.http.get('https://localhost:5001/api/users').subscribe(response => {
+    this.http.get(this.baseUrl + 'users/').subscribe(response => {
       this.users = response;
     }, error => {
       console.log(error);
