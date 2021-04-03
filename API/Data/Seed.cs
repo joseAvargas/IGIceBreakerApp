@@ -34,7 +34,7 @@ namespace API.Data
             {
                 user.UserName = user.UserName.ToLower();
 
-                await userManager.CreateAsync(user, "8!w6J7hmul%&CVtO7Y8");
+                await userManager.CreateAsync(user, "4w7X0#7Q#96sZRU72tmWc5yX5N(r)d");
                 await userManager.AddToRoleAsync(user, "Member");
             }
 
@@ -43,7 +43,7 @@ namespace API.Data
                 UserName = "admin"
             };
 
-            await userManager.CreateAsync(admin, "#5*9!!$9&9$9la2du0Fl74UlW5jea5");
+            await userManager.CreateAsync(admin, "NK@R68Pi630^(2a@!4SA#%h)#ZuP9b");
             await userManager.AddToRolesAsync(admin, new[] {"Admin", "Moderator"});
         }
     }
