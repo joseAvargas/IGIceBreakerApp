@@ -451,4 +451,3 @@ appsettings.json
 IGapp.db
 appsettings.Development.json
 API/appsettings.Development.json
-Seed.cs
