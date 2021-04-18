@@ -1,0 +1,11 @@
+.media-thumbnail {
+    width: 250px;
+}
+.card-img-top {
+    height: 300px;
+}
+.img-checkbox {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
