@@ -1,0 +1,19 @@
+<form [formGroup]="updatePasswordForm" (ngSubmit)="updatePasswordForm.valid && changePassword()" autocomplete="off">
+    <h2 class="text-center text-primary px-3">Change Password</h2>
+    <hr>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <app-text-input [formControl]='updatePasswordForm.controls["oldPassword"]' [label]='"Old Password"' type='"password"'></app-text-input>
+                <app-text-input [formControl]='updatePasswordForm.controls["newPassword"]' [label]='"New Password"' type='"password"'></app-text-input>
+                <app-text-input [formControl]='updatePasswordForm.controls["confNewPassword"]' [label]='"Confirm New Password"' type='"password"'></app-text-input>
+                
+                <div class="form-group text-center">
+                    <button [disabled]="!updatePasswordForm.valid" class="btn btn-success mr-2" type="submit">Submit</button>
+                    <button class="btn btn-default mr-2" (click)="cancelPassUpdate()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

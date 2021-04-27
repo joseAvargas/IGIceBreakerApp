@@ -11,6 +11,7 @@ import { ListsComponent } from './lists/lists.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberSettingsComponent } from './members/member-settings/member-settings.component';
 import { MessagesComponent } from './messages/messages.component';
 import { TestIgComponent } from './test-ig/test-ig.component';
 import { AdminGuard } from './_guards/admin.guard';
@@ -32,7 +33,9 @@ const routes: Routes = [
       {path: 'messages', component: MessagesComponent},
       {path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard]},
       {path: 'test-ig', component: TestIgComponent},
-      {path: 'auth', component: AuthComponent}
+      {path: 'auth', component: AuthComponent},
+      {path: 'member/settings', component: MemberSettingsComponent}
+
 
     ]
   },

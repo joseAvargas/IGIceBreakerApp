@@ -76,9 +76,47 @@ namespace API.Controllers
             };
         }
 
+        [HttpPost("update-password")]
+        public async Task<ActionResult> UpdatePassword(UpdatePasswordDto passwordDto)
+        {
+            if (string.IsNullOrEmpty(passwordDto.Username)) return BadRequest("Action not allowed");
+            if (string.IsNullOrEmpty(passwordDto.OldPassword)) return BadRequest("Old password must be entered for this action");
+            if (string.IsNullOrEmpty(passwordDto.NewPassword)) return BadRequest("New password must be entered for this action");
+            
+            var user = await _userManager.Users
+                .SingleOrDefaultAsync(x => x.UserName == passwordDto.Username.ToLower());
+
+            if (user == null) return BadRequest("Action not allowed");
+
+            if (!await CheckPasswordAsync(user, passwordDto.OldPassword)) return BadRequest("Incorrect password");
+
+            if (await ChangePassword(user, passwordDto.NewPassword))
+            {
+                return Ok();
+            }
+
+            return BadRequest("Failed to change password. Try again.");
+        }
+
         private async Task<bool> UserExists(string username)
         {
             return await _userManager.Users.AnyAsync(x => x.UserName == username.ToLower());
+        }
+
+        private async Task<bool> CheckPasswordAsync(AppUser user, string password)
+        {
+            if (await _userManager.CheckPasswordAsync(user, password))
+                return true;
+
+            return false;
+        }
+
+        private async Task<bool> ChangePassword(AppUser user, string newPassword)
+        {
+            user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, newPassword);
+            var updatedResult = await _userManager.UpdateAsync(user);
+            return updatedResult.Succeeded;
+
         }
     }
 }

@@ -34,7 +34,8 @@ import { PhotoManagementComponent } from './admin/photo-management/photo-managem
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { TestIgComponent } from './test-ig/test-ig.component';
-import { AuthComponent } from './auth/auth.component'
+import { AuthComponent } from './auth/auth.component';
+import { MemberSettingsComponent } from './members/member-settings/member-settings.component'
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { AuthComponent } from './auth/auth.component'
     RolesModalComponent,
     ConfirmDialogComponent,
     TestIgComponent,
-    AuthComponent
+    AuthComponent,
+    MemberSettingsComponent
   ],
   imports: [
     BrowserModule,
