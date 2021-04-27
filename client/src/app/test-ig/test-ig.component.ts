@@ -148,14 +148,18 @@ export class TestIgComponent implements OnInit {
 
   getUserMedia() {
     if (this.code != null){
-      this.igService.ExchageCodeForToken(this.code).subscribe(response => {
-        // localStorage.setItem('ig_token', JSON.stringify(user));
-        for(var element of response["data"]) {
-          if(element['media_type'] === 'IMAGE')
-            this.userMedia.push(element)
-        }
-        console.log(this.userMedia);
+      this.igService.GetUserMediaToken(this.code).subscribe(response => {
+        this.getImages(response[1]['data']);
+        // this.igService.SetUserToken('ig-token', response[0]);
       })
+    }
+    
+  }
+
+  getImages(data: any) {
+    for(var element of data) {
+      if(element['media_type'] === 'IMAGE')
+        this.userMedia.push(element)
     }
   }
 

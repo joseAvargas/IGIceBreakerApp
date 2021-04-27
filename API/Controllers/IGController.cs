@@ -36,8 +36,8 @@ namespace API.Controllers
             _long_lived_token_endpoint = config.Value.LongLivedTokenEndpoint;
         }
 
-        [HttpPost("ig-long-lived-token/{code}")]
-        public async Task<JsonElement> GetIgUserToken(string code)
+        [HttpPost("get-user-media-and-token/{code}")]
+        public async Task<JsonElement[]> GetIgUserMediaAndToken(string code)
         {
             if(client.BaseAddress == null)
                 client.BaseAddress = new Uri(_access_token_enpoint);
@@ -59,9 +59,11 @@ namespace API.Controllers
             var longLivedToken = longLivedTokenObj.GetProperty("access_token").ToString();
 
             var userMediaObj = await this.GetIgUserMedia(longLivedToken);
+            
+            JsonElement[] results = new JsonElement[] {longLivedTokenObj, userMediaObj};
 
 
-            return userMediaObj;
+            return results;
         }
 
         public async Task<JsonElement> GetIgUserMedia(string accessToken)
