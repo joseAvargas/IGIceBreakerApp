@@ -17,6 +17,7 @@ export class MemberSettingsComponent implements OnInit {
   member: Member;
   user: User;
   updatePasswordForm: FormGroup;
+  validationErrors: any[] = [];
 
   constructor(private fb: FormBuilder, private accountService: AccountService, 
     private memberService: MembersService, private toastr: ToastrService) { 
@@ -42,6 +43,8 @@ export class MemberSettingsComponent implements OnInit {
   changePassword() {
     this.accountService.changePassword(this.updatePasswordForm.value).subscribe(response => {
       this.toastr.success("Password changed successfully");
+    }, error => {
+      this.validationErrors = error;
     });
   }
 

@@ -38,11 +38,11 @@ namespace API.Controllers
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-            if (!result.Succeeded) return BadRequest(result.Errors);
+            if (!result.Succeeded) return BadRequest(result);
 
             var roleResult = await _userManager.AddToRoleAsync(user, "Member");
 
-            if (!result.Succeeded) return BadRequest(result.Errors);            
+            if (!result.Succeeded) return BadRequest(result);            
 
             return new UserDto
             {
@@ -88,12 +88,16 @@ namespace API.Controllers
 
             if (user == null) return BadRequest("Action not allowed");
 
-            if (!await CheckPasswordAsync(user, passwordDto.OldPassword)) return BadRequest("Incorrect password");
+            if (!await CheckPasswordAsync(user, passwordDto.OldPassword)) return BadRequest("Incorrect old password");
 
-            if (await ChangePassword(user, passwordDto.NewPassword))
-            {
-                return Ok();
-            }
+            var validator = new PasswordValidator<AppUser>();
+            var result = await validator.ValidateAsync(_userManager, user, passwordDto.NewPassword);
+
+            if (!result.Succeeded) return BadRequest(result);
+
+            var changed = await ChangePassword(user, passwordDto.NewPassword);
+            
+            if (changed) return Ok();
 
             return BadRequest("Failed to change password. Try again.");
         }

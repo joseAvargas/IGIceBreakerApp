@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   registerForm: FormGroup;
   maxDate: Date;
-  validationErrors: string[] = [];
+  validationErrors: any[] = [];
 
   constructor(private accountService: AccountService, private toastr: ToastrService, 
     private fb: FormBuilder, private router: Router) { }
@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
       dateOfBirth: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]]
     })
     this.registerForm.controls.password.valueChanges.subscribe(() => {
