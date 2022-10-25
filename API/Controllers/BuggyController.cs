@@ -45,5 +45,11 @@ namespace API.Controllers
         {
             return BadRequest("this was not a good request");
         }
+
+        [HttpGet("no-content")]
+        public ActionResult<string> GetNoContent()
+        {
+            return NoContent();
+        }
     }
 }
